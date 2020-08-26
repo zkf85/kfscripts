@@ -1,0 +1,44 @@
+#!/bin/bash
+#===============================================================================
+# Filename: kf-git-purge
+# Created on Thu Aug 20 14:10:19 CST 2020
+#
+# @author: Kefeng Zhu (zhukefeng@inspur.com, zkf1985@gmail.com, zkf85@163.com)
+#
+# Description:
+#   To delete all the commit/history of the given git repo
+#
+# Reference:
+#   https://www.shellhacks.com/git-remove-all-commits-clear-git-history-local-remote/
+#===============================================================================
+
+# the git repo directory to be purged
+GIT_REPO_DIR="/Users/Kefeng/MyInspurCloud"
+
+# current path
+CUR_DIR=`pwd`
+
+cd $GIT_REPO_DIR
+
+# 1. Create a temporary branch and checkout:
+git checkout --orphan temp_branch
+
+# 2. Add all files to the temporary branch and commit the changes:
+git add -A
+git commit -am "The first commit after purge"
+
+# 3. Delete the master branch:
+git branch -D master
+
+# 4. Rename the temporary branch to master:
+git branch -m master
+
+# 5. Forcefully update the remote repository:
+git push -f origin master
+
+# go back to the current path
+cd $CUR_DIR
+
+
+
+

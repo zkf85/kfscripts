@@ -1,0 +1,44 @@
+#!/bin/bash
+#===============================================================================
+# Filename: kfdocker-run-gen 
+# Created on Tue Aug 25 22:00:51 EDT 2020
+#
+# @author: Kefeng Zhu (zhukefeng@inspur.com, zkf1985@gmail.com, zkf85@163.com)
+#  Generate a docker-run template shell file
+#===============================================================================
+#===============================================================================
+# To create and start a container from an image
+#===============================================================================
+
+cat > $PWD/docker_run.sh <<EOF
+CONTAINER=torch14
+IMAGE=pytorch/pytorch:1.4-cuda10.1-cudnn7-runtime-vim-apex
+#IMAGE=pytorch/pytorch:1.4-cuda10.1-cudnn7-runtime
+
+#CONTAINER=tf114
+#IMAGE=nvidia/cuda:10.0-cudnn7-runtime-ubuntu18.04-conda-tf1.14-vim
+
+#CONTAINER=ubuntu1804
+#IMAGE=ubuntu:18.04
+
+docker run --gpus '"device=0"' \\
+-it -d \\
+--hostname container-$CONTAINER \\
+--shm-size 16G \\
+-p 8888:8888 \\
+-v /data:/data \\
+-v /home/:/workspace \\
+--name $CONTAINER \\
+$IMAGE
+
+#docker run --gpus 1 \\
+#docker run --gpus all \\
+#docker run --gpus '"device=1"' \\
+
+#===============================================================================
+# To access the container "cuda101" with BASH:
+#===============================================================================
+docker exec -it $CONTAINER /bin/bash
+
+EOF
+

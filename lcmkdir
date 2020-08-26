@@ -1,0 +1,160 @@
+#!/bin/bash
+#===============================================================================
+# Filename: kflc
+# Created on Thu Mar 27 15:05:12 CST 2019
+#
+# @author: Kefeng Zhu (zkf1985@gmail.com, zkf85@163.com)
+#
+# Create a leetcode post md file from template with date/time
+#
+#===============================================================================
+
+if [ $# -eq 0 ]
+then
+    echo "[KF INFO] Please enter the title of the post!"
+    exit 1
+fi
+
+for arg in "$@"
+do 
+    if [[ -n $TITLE ]]; then
+        TITLE="$TITLE $arg"
+        PROBLEM="$PROBLEM $arg"
+    else
+        TITLE=$arg
+        NUM=$arg
+    fi
+done
+
+DATE=`date +%Y-%m-%d`
+
+TITLE0=`echo $TITLE | tr '[:upper:]' '[:lower:]'`
+TITLE0=${TITLE0//\ /-} 
+LINK=`echo $PROBLEM | tr '[:upper:]' '[:lower:]'`
+LINK=${LINK//\ /-} 
+
+FILE=$DATE-leetcode-$TITLE0.md
+
+mkdir $TITLE0
+cd $TITLE0
+
+# *.md
+echo "---
+layout: post
+comments: true
+title: \"[LeetCode] $NUM.$PROBLEM\"
+date: \"$DATE\"
+category: [Algorithm]
+tag: [leetcode, python]
+---
+
+<!--more-->
+* TOC
+{:toc}
+
+## Problem 
+[$NUM.$PROBLEM](https://leetcode.com/problems/$LINK)
+
+
+## Approach 1:
+
+### Idea
+
+### Solution
+\`\`\`python
+
+\`\`\`
+
+### Complexity
+- Time: \$O()\$
+- Space: \$O()\$
+
+<br><br>***KF***
+" > $FILE
+
+# solution.py
+FILEPY="solution.py"
+echo "\"\"\"
+Filename: $FILEPY
+Created on `date`
+
+@author: Kefeng Zhu (zkf1985@gmail.com, zkf85@163.com)
+
+LeetCode Problem:
+$NUM.$PROBLEM
+https://leetcode.com/problems/$LINK
+
+\"\"\"
+
+#===============================================================================
+# Utility methods
+#===============================================================================
+# Definition for singly-linked list.
+class ListNode(object):
+    def __init__(self, x):
+        self.val = x
+        self.next = None
+
+def make_linkedList(l):
+    head = ll = ListNode(l[0])
+    for i in range(1, len(l)):
+        ll.next = ListNode(l[i])
+        ll = ll.next
+    return head
+
+def print_linkedList(ll):
+    s = str(ll.val)
+    while ll.next:
+        s += '->'
+        s += str(ll.next.val)
+        ll = ll.next
+    print(s)
+
+def linkedList_tolist(ll):
+    l = []
+    while ll:
+        l.append(ll.val)
+        ll = ll.next
+    return l
+
+def check_two_linkedList(l1, l2):
+    while True:
+        if l1.val != l2.val:
+            return False
+        l1, l2 = l1.next, l2.next
+        if not l1 and not l2: 
+            return True
+        if not (l1 and l2):
+            return False
+
+def list_to_set(l):
+    tmp = set()
+    for i in l:
+        tmp.add(tuple(i))
+    return tmp 
+
+#===============================================================================
+# Solutions
+#===============================================================================
+class Solution1:
+
+
+#===============================================================================
+# Test
+#===============================================================================
+testset = [
+    {'args': , 'ans': }, 
+
+]
+
+sol = Solution1()
+for test in testset:
+    print('-'*80)
+    print('Input:', test['args'])
+    print('Correct:', test['ans'])
+
+    res = sol.func(test['args'])
+    print('Output:', res)
+    if res == test['ans']: print('Passed.')
+    else: print('Wrong!!')
+" > $FILEPY

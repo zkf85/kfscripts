@@ -1,0 +1,21 @@
+#!/bin/bash
+#===============================================================================
+# Filename: kfdocker-exec
+# Created on Tue Aug 25 21:55:08 EDT 2020
+#
+# @author: Kefeng Zhu (zhukefeng@inspur.com, zkf1985@gmail.com, zkf85@163.com)
+#
+# Login to a running Docker container with Bash
+#===============================================================================
+if [ $# != 1 ]; then
+    docker ps -a
+    echo ""
+    echo "== Exec a Docker Container =="
+    echo "[Usage:] kfdocker_exec [container_name]"
+    echo ""
+    exit
+fi
+        
+CONTAINER=$1
+docker exec -it $CONTAINER /bin/bash
+

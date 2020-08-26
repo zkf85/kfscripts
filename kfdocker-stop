@@ -1,0 +1,20 @@
+#!/bin/bash
+#===============================================================================
+# Filename: kfdocker-stop 
+# Created on Tue Aug 25 22:14:11 EDT 2020
+#
+# @author: Kefeng Zhu (zhukefeng@inspur.com, zkf1985@gmail.com, zkf85@163.com)
+#
+# Stop a runnng docker container
+#===============================================================================
+if [ $# != 1 ]; then
+    docker ps -a
+    echo ""
+    echo "== Stop a Docker Container =="
+    echo "[Usage:] kfdocker_stop [container_name]"
+    echo ""
+    exit
+fi
+CONTAINER=$1
+docker stop $CONTAINER
+

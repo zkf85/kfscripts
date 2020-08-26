@@ -1,0 +1,30 @@
+#!/bin/bash
+#===============================================================================
+# Filename: kftouchsh 
+# Created on Thu Mar 13 15:05:12 CST 2019
+#
+# @author: Kefeng Zhu (zkf1985@gmail.com, zkf85@163.com)
+#
+# Create a Python scripts with header template.
+#
+#===============================================================================
+FILE=$1
+echo "/* 
+Filename: $FILE 
+Created on `date`
+@author: Kefeng Zhu (zhukefeng@inspur.com, zkf1985@gmail.com, zkf85@163.com)
+
+Description: 
+
+*/
+
+#include <stdio.h>
+
+int main() {
+
+    return 0;
+}
+
+" > $FILE
+
+vim $FILE

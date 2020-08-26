@@ -1,0 +1,72 @@
+#!/bin/bash
+#===============================================================================
+# Filename: kfjpynb-remote 
+# Created on Thu Mar 19 16:48:06 CST 2020
+#
+# @author: Kefeng Zhu (zhukefeng@inspur.com, zkf1985@gmail.com, zkf85@163.com)
+# 
+# This shell script is to automatically create an ssh tunnel and connect it to 
+# the jupyter notebook that just started on a remote server
+#===============================================================================
+#
+#-------------------------------------------------------------------------------
+# Note: Before running this script, you should run the following command on you 
+#       remote server to open a jupyter notebook. (for simplicity, here a fixed
+#       value for the port is applied)
+#-------------------------------------------------------------------------------
+#jupyter notebook --no-browser --port=8888
+#
+#-------------------------------------------------------------------------------
+# define variable for flexibility
+# Modified by KFZ on Thu Aug 20 16:11:54 CST 2020
+#-------------------------------------------------------------------------------
+# Check input argument numbers (must be 1)
+
+if [ $# != 1 ]; then
+    echo ""
+    echo "Usage: $0 remote_server_variable (e.g. user@192.168.0.1)"
+    echo ""
+    exit
+fi
+
+echo ""
+echo "The remote server name you entered is: $1"
+echo ""
+
+
+REMOTE_SERVER=$1
+LOCAL_PORT="localhost:8000"
+REMOTE_PORT="localhost:8888"
+
+#-------------------------------------------------------------------------------
+# Then, open the notebook through local link automatically either in Safari 
+# (default) or in Chrome.
+# 
+# NOTE 1: 
+# If you do not care about the security of the server, you can first create a jupyer config file with:
+# cd ~/.jupyter
+# jupyter notebook --generate-config
+# Then set the c.NotebookApp.token parameter to an empty string in the configuration file created
+# c.NotebookApp.token = ''
+# As said in comment, Setting to an empty string disables authentication altogether, which is NOT RECOMMENDED.
+# NOTE 2:
+#   In order to avoid the tunnel go background and forget to kill it. here we open
+# the proposed link with multithread and a sleep FIRST, and then create the tunnel
+# to make sure that once the shell is killed, the tunnel is terminated too!
+# NOTE 3:
+#   I installed a vim binding on extension on the jupyter, which is not working on
+# Safari, so Chrome is preferred.
+#-------------------------------------------------------------------------------
+#sleep .1 && open http://$LOCAL_PORT &
+sleep 1 && open -a "Google Chrome" http://$LOCAL_PORT &
+
+#-------------------------------------------------------------------------------
+# Then we connect the remote port with local port by the following 
+# Note: after the shell in which this script run is killed, the tunnel will be
+#       terminated as well.
+#-------------------------------------------------------------------------------
+echo "[kf info] create an SSH tunnel between local $LOCAL_PORT and $REMOTE_PORT ..."
+
+ssh -N -L $LOCAL_PORT:$REMOTE_PORT $REMOTE_SERVER
+#ssh -f -N -L $LOCAL_PORT:$REMOTE_PORT $REMOTE_SERVER
+

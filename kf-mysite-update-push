@@ -1,0 +1,16 @@
+#!/bin/bash
+# 1. update blog's local git repo
+# 2. git push the updated repo
+JEKYLL_DIR="$HOME/Documents/kfwebsite"
+REPO_DIR="$HOME/Documents/zkf85.github.io"
+
+CUR_DIR=`pwd`
+
+rm -rf $REPO_DIR/*
+cp -r $JEKYLL_DIR/_site/* $REPO_DIR/
+cd $REPO_DIR
+git add .
+git commit -m 'update `date`'
+git push
+
+cd $CUR_DIR

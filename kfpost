@@ -1,0 +1,54 @@
+#!/bin/bash
+#===============================================================================
+# Filename: kfpost
+# Created on Thu Mar 13 15:05:12 CST 2019
+#
+# @author: Kefeng Zhu (zkf1985@gmail.com, zkf85@163.com)
+#
+# Create a post md file from template with date/time
+#
+#===============================================================================
+
+if [ $# -eq 0 ]
+then
+    echo "[KF INFO] Please enter the title of the post!"
+    exit 1
+fi
+
+for arg in "$@"
+do 
+    TITLE="$TITLE $arg"
+
+done
+
+#delete the leading space in $TITLE
+echo $TITLE
+TITLE=`echo $TITLE | sed -e 's/^ *//'`
+
+DATE=`date +%Y-%m-%d`
+
+TITLE0=`echo $TITLE | tr '[:upper:]' '[:lower:]'`
+TITLE0=${TITLE0//\ /-} 
+
+FILE=$DATE-$TITLE0.md
+
+echo "---                                                                                                                       
+layout: post
+comments: true
+title: \"$TITLE\"
+date: \"$DATE\"
+category: []
+tag: [] 
+---
+
+
+<!--more-->
+* TOC
+{:toc}
+
+
+
+<br><br>***KF***
+" > $FILE
+
+vim $FILE

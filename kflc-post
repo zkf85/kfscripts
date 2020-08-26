@@ -1,0 +1,71 @@
+#!/bin/bash
+#===============================================================================
+# Filename: kflc
+# Created on Thu Mar 26 15:05:12 CST 2019
+#
+# @author: Kefeng Zhu (zkf1985@gmail.com, zkf85@163.com)
+#
+# Create a leetcode post md file from template with date/time
+#
+#===============================================================================
+
+if [ $# -eq 0 ]
+then
+    echo "[KF INFO] Please enter the title of the post!"
+    exit 1
+fi
+
+for arg in "$@"
+do 
+    if [[ -n $TITLE ]]; then
+        TITLE="$TITLE $arg"
+        PROBLEM="$PROBLEM $arg"
+    else
+        TITLE=$arg
+        NUM=$arg
+    fi
+done
+
+DATE=`date +%Y-%m-%d`
+
+TITLE0=`echo $TITLE | tr '[:upper:]' '[:lower:]'`
+TITLE0=${TITLE0//\ /-} 
+LINK=`echo $PROBLEM | tr '[:upper:]' '[:lower:]'`
+LINK=${LINK//\ /-} 
+
+FILE=$DATE-leetcode-$TITLE0.md
+
+echo "---
+layout: post
+comments: true
+title: \"[LeetCode] $NUM.$PROBLEM\"
+date: \"$DATE\"
+category: [Algorithm]
+tag: [leetcode, python]
+---
+
+## Problem 
+[$NUM.$PROBLEM](https://leetcode.com/problems/$LINK)
+
+<!--more-->
+
+* TOC
+{:toc}
+
+## Approach 1:
+
+### Idea:
+
+### Solution:
+```python
+
+```
+
+### Complexity:
+- Time: 
+- Space: 
+
+<br><br>***KF***
+" > $FILE
+
+vim $FILE

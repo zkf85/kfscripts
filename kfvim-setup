@@ -1,0 +1,24 @@
+#!/bin/bash
+#===============================================================================
+# Filename: kfvim-setup 
+# Created on Wed Aug 26 10:26:51 CST 2020
+#
+# @author: Kefeng Zhu (zhukefeng@inspur.com, zkf1985@gmail.com, zkf85@163.com)
+#   
+#   Setup my VIM environment, by:
+#       - copy rc file "kfvim/.vimrc" to ~
+#       - copy folder "kfvim/.vim" to ~
+#===============================================================================
+
+ABS_PATH=`which $0`
+BASE_DIR=`dirname $ABS_PATH`
+
+echo -e " \n
+[KF INFO] Setting up my VIM environment, by: 
+    - copy rc file "kfvim/.vimrc" to ~ 
+    - copy folder "kfvim/.vim" to ~ 
+"
+cp $BASE_DIR/kfvim/.vimrc ~
+cp -r $BASE_DIR/kfvim/.vim ~
+
+
