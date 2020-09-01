@@ -7,7 +7,7 @@ log_save_dir = '/home'
 # Setup Logging
 # create a logger
 logger = logging.getLogger("KFZ")
-logger.setLevel(level=logging.DEBUG)
+logger.setLevel(level=logging.INFO)
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(message)s')
 # set file handler
 handler = logging.FileHandler(os.path.join(log_save_dir, 'log.txt'))
