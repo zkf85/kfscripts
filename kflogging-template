@@ -1,0 +1,20 @@
+#!/bin/bash
+
+echo "
+import logging
+
+log_save_dir = '/home'
+# Setup Logging
+# create a logger
+logger = logging.getLogger("KFZ")
+logger.setLevel(level=logging.DEBUG)
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(message)s')
+# set file handler
+handler = logging.FileHandler(os.path.join(log_save_dir, 'log.txt'))
+handler.setFormatter(formatter)
+logger.addHandler(handler)
+# set stream handler
+console = logging.StreamHandler()
+console.setFormatter(formatter)
+logger.addHandler(console)
+"
