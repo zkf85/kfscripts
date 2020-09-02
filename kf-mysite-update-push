@@ -6,8 +6,8 @@ REPO_DIR="$HOME/Documents/zkf85.github.io"
 
 CUR_DIR=`pwd`
 
-rm -rf $REPO_DIR/*
-cp -r $JEKYLL_DIR/_site/* $REPO_DIR/
+rm -rf ${REPO_DIR:-default}/*
+cp -r $JEKYLL_DIR/_site/* $REPO_DIR
 cd $REPO_DIR
 git add .
 git commit -m 'update `date`'

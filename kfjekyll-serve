@@ -1,0 +1,19 @@
+#!/bin/bash
+#===============================================================================
+# Filename: kfjekyll-serve 
+# Created on Tue Sep  1 09:17:34 CST 2020
+#
+# @author: Kefeng Zhu (zhukefeng@inspur.com, zkf1985@gmail.com, zkf85@163.com)
+#
+#===============================================================================
+WEBSITE_ROOT="/Users/Kefeng/Documents/kfwebsite"
+
+PWD=`pwd`
+
+echo "[KF INFO] Enter to website folder $WEBSITE_ROOT"
+cd $WEBSITE_ROOT
+
+echo "[KF INFO] Start Jekyll Serve in $WEBSITE_ROOT"
+bundle exec jekyll serve
+
+
