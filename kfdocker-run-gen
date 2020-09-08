@@ -21,19 +21,19 @@ IMAGE=pytorch/pytorch:1.4-cuda10.1-cudnn7-runtime-vim-apex
 #CONTAINER=ubuntu1804
 #IMAGE=ubuntu:18.04
 
-docker run --gpus '"device=0"' \\
+docker run --gpus '"device=0"' \
 -it -d \\
---hostname container-$CONTAINER \\
---shm-size 16G \\
--p 8888:8888 \\
--v /data:/data \\
--v /home/:/workspace \\
---name $CONTAINER \\
+--hostname container-$CONTAINER \
+--shm-size 16G \
+-p 8888:8888 \
+-v /data:/data \
+-v /home/:/workspace \
+--name $CONTAINER \
 $IMAGE
 
-#docker run --gpus 1 \\
-#docker run --gpus all \\
-#docker run --gpus '"device=1"' \\
+#docker run --gpus 1 \
+#docker run --gpus all \
+#docker run --gpus '"device=1"' \
 
 #===============================================================================
 # To access the container "cuda101" with BASH:
