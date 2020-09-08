@@ -10,7 +10,7 @@
 # To create and start a container from an image
 #===============================================================================
 
-cat > $PWD/docker_run.sh <<EOF
+cat > $PWD/docker_run.sh <<'EOF'
 CONTAINER=torch14
 IMAGE=pytorch/pytorch:1.4-cuda10.1-cudnn7-runtime-vim-apex
 #IMAGE=pytorch/pytorch:1.4-cuda10.1-cudnn7-runtime

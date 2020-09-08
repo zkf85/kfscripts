@@ -2,6 +2,7 @@
 
 echo "
 import logging
+import os
 
 log_save_dir = '/home'
 # Setup Logging
