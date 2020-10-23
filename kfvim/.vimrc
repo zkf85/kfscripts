@@ -35,9 +35,13 @@ Plugin 'preservim/nerdtree'         " show directory tree stuff
 Plugin 'Yggdroot/indentLine'        " indent guides
 
 "Color Schemes:
-"Plugin 'jnurmine/Zenburn'           " a low contrast color scheme
-"Plugin 'tomasr/molokai'             " a nice vigorous color scheme
+Plugin 'jnurmine/Zenburn'           " a low contrast color scheme
+Plugin 'tomasr/molokai'             " a nice vigorous color scheme
 Plugin 'morhetz/gruvbox'            " another eye-protecting color scheme
+
+"VIM LaTeX:
+Plugin 'lervag/vimtex'              " a modern Vim and neovim filetype plugin for LaTeX files.
+
 "-------------------------------------------------------------------------------
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -92,3 +96,10 @@ set laststatus=2            " always show status bar
 "-------------------------------------------------------------------------------
 set wildmenu                " enable a full menu for file open/search
 set wildmode=list:longest,full
+
+"-------------------------------------------------------------------------------
+" Settings for vimtex 
+"-------------------------------------------------------------------------------
+let g:tex_flavor = 'latex'
+let g:vimtex_view_method = 'skim'
+"let g:vimtex_view_general_viewer = 'open -a texshop'
